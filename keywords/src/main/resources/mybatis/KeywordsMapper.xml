@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stupidzhang.keywords.mapper.KeywordsMapper">
+    <resultMap id="BaseResultMap" type="com.stupidzhang.keywords.model.Keywords">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="key" jdbcType="VARCHAR" property="key"/>
+        <result column="reply" jdbcType="VARCHAR" property="reply"/>
+        <result column="deleted" jdbcType="BOOLEAN" property="deleted"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , `key`, reply, deleted, create_time, `update_time`
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from keywords_tab
+        where id = #{id}
+    </select>
+    <select id="keys" resultType="java.lang.String">
+        select `key`
+        from keywords_tab
+        where deleted = 0
+    </select>
+    <select id="getKeysReply" resultType="java.lang.String">
+        select reply
+        from keywords_tab
+        where `key` = #{keyword}
+          AND deleted = 0
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from keywords_tab
+        where id = #{id}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.stupidzhang.keywords.model.Keywords"
+            useGeneratedKeys="true">
+        insert into keywords_tab (`key`, reply, deleted,
+                                  create_time, `update_time`)
+        values (#{key}, #{reply}, #{deleted},
+                #{createTime}, #{updateTime})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.stupidzhang.keywords.model.Keywords"
+            useGeneratedKeys="true">
+        insert into keywords_tab
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="key != null">
+                `key`,
+            </if>
+            <if test="reply != null">
+                reply,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                `update_time`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="key != null">
+                #{key},
+            </if>
+            <if test="reply != null">
+                #{reply},
+            </if>
+            <if test="deleted != null">
+                #{deleted},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateTime != null">
+                #{createTime},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.stupidzhang.keywords.model.Keywords">
+        update keywords_tab
+        <set>
+            <if test="key != null">
+                `key` = #{key},
+            </if>
+            <if test="reply != null">
+                reply = #{reply},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="createTime != null">
+                `update_time` = #{createTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.stupidzhang.keywords.model.Keywords">
+        update keywords_tab
+        set `key`         = #{key},
+            reply         = #{reply},
+            deleted       = #{deleted},
+            create_time   = #{createTime},
+            `update_time` = #{updateTime}
+        where id = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,29 @@
+nacos:
+  server-addr: nacos.stupidzhang.com:8848
+  namespace: 6cc878e5-4980-4b47-9123-ad355de4466e
+
+server:
+  port: 8888
+spring:
+  application:
+    name: fuwuhao
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${nacos.server-addr}
+        namespace: ${nacos.namespace}
+      config:
+        name: fuwuhao
+        server-addr: ${nacos.server-addr}
+        namespace: ${nacos.namespace}
+        fileExtension: yaml
+        shared-configs[0]:
+          data-id: data-source.yaml
+        shared-configs[1]:
+          data-id: weixinmp.yaml
+        shared-configs[2]:
+          data-id: xxl-job.yaml
+        shared-configs[3]:
+          data-id: jingfen.yaml
+        shared-configs[4]:
+          data-id: fwh-template.yaml

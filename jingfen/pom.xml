@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>fuwuhao</artifactId>
+        <groupId>com.stupidzhang</groupId>
+        <version>0.0.1</version>
+    </parent>
+    <packaging>jar</packaging>
+    <artifactId>jingfen</artifactId>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.stupidzhang</groupId>
+            <artifactId>jingdong-api</artifactId>
+            <version>2.0</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/src/main/resources/libs/open-api-sdk-2.0.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>wx-java-mp-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-context</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

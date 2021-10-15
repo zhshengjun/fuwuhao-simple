@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.2.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>com.stupidzhang</groupId>
+    <artifactId>fuwuhao</artifactId>
+    <packaging>pom</packaging>
+    <name>fuwuhao</name>
+    <version>0.0.1</version>
+
+    <modules>
+        <module>start</module>
+        <module>convert</module>
+        <module>keywords</module>
+        <module>weixin</module>
+        <module>miniprogram</module>
+        <module>jingfen</module>
+        <module>schedules</module>
+    </modules>
+
+    <properties>
+        <skipTests>true</skipTests>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <spring-boot.version>2.3.2.RELEASE</spring-boot.version>
+        <fastjson.version>1.2.78</fastjson.version>
+        <xxl-job.version>2.3.0</xxl-job.version>
+        <nacos-client.version>2.0.3</nacos-client.version>
+        <mybatis-start.version>2.1.4</mybatis-start.version>
+        <mysql-connector.version>8.0.22</mysql-connector.version>
+        <mybatis-starter.version>2.2.0</mybatis-starter.version>
+        <druid.version>1.2.4</druid.version>
+        <spring-cloud-dependencies.version>Hoxton.SR12</spring-cloud-dependencies.version>
+        <spring-cloud-alibaba.version>2.2.6.RELEASE</spring-cloud-alibaba.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>com.stupidzhang</groupId>
+                <artifactId>convert</artifactId>
+                <version>0.0.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.stupidzhang</groupId>
+                <artifactId>keywords</artifactId>
+                <version>0.0.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.stupidzhang</groupId>
+                <artifactId>weixin</artifactId>
+                <version>0.0.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.stupidzhang</groupId>
+                <artifactId>jingfen</artifactId>
+                <version>0.0.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.stupidzhang</groupId>
+                <artifactId>schedules</artifactId>
+                <version>0.0.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>wx-java-mp-spring-boot-starter</artifactId>
+                <version>4.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.72</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>1.9.13</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.12.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.22</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-context</artifactId>
+                <version>2.2.6.RELEASE</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>5.6.4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl-job.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${nacos-client.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-start.version}</version>
+                <type>jar</type>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud-dependencies.version}</version>
+                <type>pom</type>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- MySql连接 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <!-- mybatis -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-starter.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
