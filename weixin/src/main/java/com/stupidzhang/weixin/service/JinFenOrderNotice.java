@@ -38,10 +38,10 @@ public class JinFenOrderNotice {
     @Autowired
     private WxMpService wxMpService;
 
-    public void message() {
+    public String message() {
         log.warn("local:{} | openId:{} | orderTemplateId:{}", local, openId, orderTemplateId);
         if (!local) {
-            return;
+            return "当前环境不发送消息！";
         }
         LocalDateTime orderTime = LocalDateTime.now().withNano(0);
         LocalDateTime startTime = orderTime.minusMinutes(60);
@@ -50,14 +50,16 @@ public class JinFenOrderNotice {
         WeiXinMessageEntity weiXinMessageEntity = jingFenApiService.queryOrderList(startTimeStr, endTimeStr);
         if (weiXinMessageEntity == null) {
             log.warn("未获取到订单信息！");
-            return;
+            return "未获取到订单信息！";
         }
         List<WxMpTemplateData> templateDataList = new ArrayList<>();
         templateDataList.add(new WxMpTemplateData(WxMessageConstants.MESSAGE_FIRST, weiXinMessageEntity.getFirst().getValue(), weiXinMessageEntity.getFirst().getColor()));
+        templateDataList.add(new WxMpTemplateData(WxMessageConstants.MESSAGE_KEYWORD_ONE, weiXinMessageEntity.getKeyword1().getValue(), weiXinMessageEntity.getKeyword1().getColor()));
         templateDataList.add(new WxMpTemplateData(WxMessageConstants.MESSAGE_KEYWORD_TWO, weiXinMessageEntity.getKeyword2().getValue(), weiXinMessageEntity.getKeyword2().getColor()));
         templateDataList.add(new WxMpTemplateData(WxMessageConstants.MESSAGE_KEYWORD_THREE, weiXinMessageEntity.getKeyword3().getValue(), weiXinMessageEntity.getKeyword3().getColor()));
         // 发送消息
         sendMessage(openId, orderTemplateId, templateDataList);
+        return "";
     }
 
     public void sendMessage(String openId, String templateId, List<WxMpTemplateData> templateDataList) {

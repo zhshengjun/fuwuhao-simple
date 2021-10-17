@@ -14,7 +14,7 @@ public class KeyWordsHandler extends AbstractionHandler {
 
     @Override
     public int order() {
-        return 999;
+        return Integer.MAX_VALUE;
     }
 
     @Override

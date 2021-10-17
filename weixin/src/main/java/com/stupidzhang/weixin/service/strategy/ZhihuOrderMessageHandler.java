@@ -19,12 +19,12 @@ public class ZhihuOrderMessageHandler extends AbstractionHandler {
 
     @Override
     public Boolean compare(String content) {
-        return StringUtils.containsAny(content, "知乎订单");
+        return StringUtils.containsAny(content, "知乎");
     }
 
     @Override
     public String handle(String openId, String content) {
-        jinFenOrderNotice.message();
-        return "请注意查收消息";
+        String message = jinFenOrderNotice.message();
+        return StringUtils.isNotBlank(message)? message : MessageContants.DEFAULT_NULL;
     }
 }

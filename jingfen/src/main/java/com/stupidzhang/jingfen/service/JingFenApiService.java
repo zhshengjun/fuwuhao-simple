@@ -107,7 +107,6 @@ public class JingFenApiService {
      * @return omit
      */
     private WeiXinMessageEntity buildOrder(List<OrderRowResp> orderList) {
-
         // 订单数量
         long orderNum = orderList.stream().map(OrderRowResp::getOrderId).distinct().count();
         double estimateFee = orderList.stream()
@@ -115,9 +114,9 @@ public class JingFenApiService {
                 .mapToDouble(OrderRowResp::getEstimateFee).sum();
         double eEstimateCosPrice = orderList.stream().mapToDouble(OrderRowResp::getEstimateCosPrice).sum();
         WeiXinMessageEntity entity = new WeiXinMessageEntity();
-        entity.setFirst(new EntityBase(String.valueOf(orderNum), "#5d6375"));
-        entity.setKeyword1(new EntityBase(String.format("%.2f", estimateFee), "#9e0606"));
-        entity.setKeyword2(new EntityBase(String.format("%.2f", eEstimateCosPrice), "#5d6375"));
+        entity.setFirst(new EntityBase("你有新的支付订单了！共计 " + orderNum + " 笔，预计佣金 " + estimateFee + " 元", "#5d6375"));
+        entity.setKeyword1(new EntityBase(String.format("%.2f", eEstimateCosPrice), "#9e0606"));
+        entity.setKeyword2(new EntityBase("一小时内", "#5d6375"));
         entity.setKeyword3(new EntityBase(orderItems(orderList), "#5d6375"));
         return entity;
     }
@@ -132,22 +131,16 @@ public class JingFenApiService {
         StringBuilder contentBuilder = new StringBuilder();
         AtomicInteger orderSeq = new AtomicInteger(1);
         orderList.forEach(orderRowResp -> {
-            String skuName = orderRowResp.getSkuName();
-            Integer plus = orderRowResp.getPlus();
-            Integer traceType = orderRowResp.getTraceType();
             OrderStatusEnum orderStatus = OrderStatusEnum.getOrderStatus(orderRowResp.getValidCode());
-            String traceTypeName = traceType == 2 ? "同店" : "跨店";
             // 订单类型
             contentBuilder.append(orderSeq.getAndIncrement()).append("、");
-            contentBuilder.append("【").append(traceTypeName).append("-").append(orderStatus.getState());
+            contentBuilder.append("【").append(orderRowResp.getTraceType() == 2 ? "同店" : "跨店").append("-").append(orderStatus.getState());
             // 无效原因
             if (StringUtils.isNotBlank(orderStatus.getReason())) {
                 contentBuilder.append("-").append(orderStatus.getReason());
             }
-            if (plus == 1) {
-                contentBuilder.append("-").append("PLUS");
-            }
             contentBuilder.append("】");
+            String skuName = orderRowResp.getSkuName();
             contentBuilder.append(StringUtils.substring(skuName, 0, Math.min(skuName.length(), 30)))
                     .append("...").append("\n");
         });

@@ -8,6 +8,7 @@ import com.stupidzhang.weixin.handler.SubscribeWxMpMessageHandler;
 import com.stupidzhang.weixin.handler.UnsubscribeWxMpMessageHandler;
 import lombok.AllArgsConstructor;
 import me.chanjar.weixin.common.api.WxConsts;
+import me.chanjar.weixin.common.util.http.apache.DefaultApacheHttpClientBuilder;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.WxMpService;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -46,5 +47,15 @@ public class AppConfiguration {
 
         return newRouter;
     }
+
+    @Bean
+    public DefaultApacheHttpClientBuilder defaultApacheHttpClientBuilder(){
+        DefaultApacheHttpClientBuilder defaultApacheHttpClientBuilder = DefaultApacheHttpClientBuilder.get();
+        defaultApacheHttpClientBuilder.setConnectionTimeout(10000);
+        defaultApacheHttpClientBuilder.setSoTimeout( 10000);
+        return defaultApacheHttpClientBuilder;
+    }
+
+
 
 }

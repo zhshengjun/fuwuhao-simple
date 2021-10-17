@@ -32,7 +32,7 @@ public class TbUrlConvertServiceImpl implements UrlConvertService {
 
     @Override
     public Boolean support(String type) {
-        return "ddx".equals(type);
+        return "tb".equals(type);
     }
 
 }
