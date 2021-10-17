@@ -24,6 +24,7 @@
         <module>miniprogram</module>
         <module>jingfen</module>
         <module>schedules</module>
+        <module>cps</module>
     </modules>
 
     <properties>
@@ -73,6 +74,12 @@
             <dependency>
                 <groupId>com.stupidzhang</groupId>
                 <artifactId>schedules</artifactId>
+                <version>0.0.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.stupidzhang</groupId>
+                <artifactId>cps</artifactId>
                 <version>0.0.1</version>
             </dependency>
 

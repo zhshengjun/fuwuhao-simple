@@ -9,9 +9,10 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {
         "com.stupidzhang.start", "com.stupidzhang.keywords",
         "com.stupidzhang.weixin", "com.stupidzhang.convert",
-        "com.stupidzhang.jingfen","com.stupidzhang.schedules"
+        "com.stupidzhang.jingfen","com.stupidzhang.schedules",
+        "com.stupidzhang.cps"
 })
-@MapperScan(basePackages = {"com.stupidzhang.keywords.mapper","com.stupidzhang.jingfen.mapper"})
+@MapperScan(basePackages = {"com.stupidzhang.keywords.mapper","com.stupidzhang.jingfen.mapper","com.stupidzhang.cps.mapper"})
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 public class StartApplication {
 

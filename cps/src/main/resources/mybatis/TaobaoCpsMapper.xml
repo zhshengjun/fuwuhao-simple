@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stupidzhang.cps.mapper.MyBatisBaseMapper">
+    <resultMap id="BaseResultMap" type="com.stupidzhang.cps.model.TaobaoCps">
+        <id column="id" property="id"/>
+        <result column="long_coupon_tpwd" property="longCouponTpwd"/>
+        <result column="qr_code" property="qrCode"/>
+        <result column="notes" property="notes"/>
+        <result column="item_image_url" property="itemImageUrl"/>
+        <result column="cps_image_url" property="cpsImageUrl"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        `id`
+        , `long_coupon_tpwd`, qr_code, notes, item_image_url, `cps_image_url`
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tao_bao_cps
+        where id = #{id}
+    </select>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.stupidzhang.cps.model.TaobaoCps"
+            useGeneratedKeys="true">
+        insert into tao_bao_cps (`long_coupon_tpwd`, qr_code, notes,
+                                 item_image_url, `cps_image_url`)
+        values (#{longCouponTpwd}, #{qrCode}, #{notes},
+                #{itemImageUrl}, #{cpsImageUrl})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.stupidzhang.cps.model.TaobaoCps">
+        update tao_bao_cps
+        set `long_coupon_tpwd` = #{longCouponTpwd},
+            qr_code            = #{qrCode},
+            notes              = #{notes},
+            item_image_url     = #{itemImageUrl},
+            `cps_image_url`    = #{cpsImageUrl}
+        where id = #{id}
+    </update>
+</mapper>

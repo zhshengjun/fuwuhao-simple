@@ -36,6 +36,11 @@
             <artifactId>schedules</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.stupidzhang</groupId>
+            <artifactId>cps</artifactId>
+        </dependency>
+
         <!-- Springboot web依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
