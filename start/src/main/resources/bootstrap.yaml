@@ -27,3 +27,5 @@ spring:
           data-id: jingfen.yaml
         shared-configs[4]:
           data-id: fwh-template.yaml
+        shared-configs[5]:
+          data-id: oss.yaml
