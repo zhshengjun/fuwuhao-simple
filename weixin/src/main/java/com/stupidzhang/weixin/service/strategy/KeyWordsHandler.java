@@ -19,15 +19,11 @@ public class KeyWordsHandler extends AbstractionHandler {
 
     @Override
     public Boolean compare(String content) {
-        return true;
+        return keywordsService.match(content);
     }
 
     @Override
     public String handle(String openId, String content) {
-        String result = keywordsService.getKeysReply(content);
-        if (StringUtils.isNotBlank(result)) {
-            return result;
-        }
-        return MessageContants.DEFAULT_NULL;
+        return keywordsService.getKeysReply(content);
     }
 }

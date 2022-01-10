@@ -62,9 +62,11 @@ public class CpsService {
             ImageIO.write(image, formatName, new File(qrcode));
             pictureProcessor.generateCpsPictureUrl(path, qrcode);
             String uploadItem = aliyunUploadService.upload(path);
+            log.info(uploadItem);
             imageList.add(uploadItem);
             String uploadQrcode = aliyunUploadService.upload(qrcode);
             imageList.add(uploadQrcode);
+            log.info(uploadQrcode);
         } catch (IOException e) {
             e.printStackTrace();
         }

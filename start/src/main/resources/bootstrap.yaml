@@ -29,3 +29,11 @@ spring:
           data-id: fwh-template.yaml
         shared-configs[5]:
           data-id: oss.yaml
+
+arthas:
+  # 通过http访问的端口
+  http-port: 8886
+  telnet-port: -1
+  session-timeout: 1800
+  # 绑定的ip
+  ip: 0.0.0.0

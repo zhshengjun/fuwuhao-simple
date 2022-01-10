@@ -39,7 +39,7 @@ public class JinFenOrderNotice {
     private WxMpService wxMpService;
 
     public String message() {
-        log.warn("local:{} | openId:{} | orderTemplateId:{}", local, openId, orderTemplateId);
+        log.info("local:{} | openId:{} | orderTemplateId:{}", local, openId, orderTemplateId);
         if (!local) {
             return "当前环境不发送消息！";
         }

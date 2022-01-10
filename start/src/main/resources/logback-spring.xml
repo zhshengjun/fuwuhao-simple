@@ -23,25 +23,24 @@
     </appender>
 
 
-    <appender name="weiXinAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="fuwuhaoAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>WARN</level>
+            <level>INFO</level>
         </filter>
-        <file>logs/app.log</file>
+        <file>logs/fuwuhao.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>logs/app.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!--日志文件保留天数-->
-            <MaxHistory>5</MaxHistory>
+            <MaxHistory>7</MaxHistory>
         </rollingPolicy>
         <encoder>
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
         </encoder>
     </appender>
 
-
-    <logger name="com.stupidzhang.fuwuhao" additivity="false">
-        <appender-ref ref="weiXinAppender"/>
-    </logger>
+    <root level="INFO">
+        <appender-ref ref="fuwuhaoAppender"/>
+    </root>
 
     <root level="DEBUG">
         <appender-ref ref="console"/>

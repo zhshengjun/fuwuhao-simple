@@ -23,7 +23,7 @@ public class SchedulesJobHandler {
     @XxlJob("schedulesJobHandler")
     public ReturnT<String> schedulesJobHandler() {
         jinFenOrderNotice.message();
-        log.warn("发送模版消息成功");
+        log.warn("京粉订单消息定时任务调度成功！");
         return ReturnT.SUCCESS;
     }
 

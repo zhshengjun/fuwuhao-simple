@@ -66,7 +66,11 @@ public class JingFenApiService {
             List<OrderRowResp> orderList = originList.stream()
                     .filter(order -> !(order.getParentId() == 0
                             && (OrderStatusEnum.TWO.getCode().equals(order.getValidCode())
-                            || OrderStatusEnum.THREE.getCode().equals(order.getValidCode()))
+                            || OrderStatusEnum.THREE.getCode().equals(order.getValidCode())
+                            || OrderStatusEnum.SIX.getCode().equals(order.getValidCode())
+                            || OrderStatusEnum.EIGHT.getCode().equals(order.getValidCode())
+                            || OrderStatusEnum.FIFTEEN.getCode().equals(order.getValidCode())
+                    )
                     ))
                     .collect(Collectors.toList());
             if (orderList.isEmpty()) {
@@ -74,7 +78,9 @@ public class JingFenApiService {
                 return null;
             }
             log.warn("【{}~{}】期间新增订单啦", startTime, endTime);
-            return buildOrder(orderList);
+            WeiXinMessageEntity weiXinMessageEntity = buildOrder(orderList);
+            weiXinMessageEntity.setKeyword2(new EntityBase(startTime + " - " + endTime, "#5d6375"));
+            return weiXinMessageEntity;
         }
 
         return null;
@@ -111,12 +117,15 @@ public class JingFenApiService {
         long orderNum = orderList.stream().map(OrderRowResp::getOrderId).distinct().count();
         double estimateFee = orderList.stream()
                 .filter(orderRowResp -> OrderStatusEnum.SIXTEEN.getCode().equals(orderRowResp.getValidCode()))
-                .mapToDouble(OrderRowResp::getEstimateFee).sum();
+                .mapToDouble(item -> item.getEstimateCosPrice() * item.getCommissionRate() * 0.007).sum();
         double eEstimateCosPrice = orderList.stream().mapToDouble(OrderRowResp::getEstimateCosPrice).sum();
         WeiXinMessageEntity entity = new WeiXinMessageEntity();
-        entity.setFirst(new EntityBase("你有新的支付订单了！共计 " + orderNum + " 笔，预计佣金 " + estimateFee + " 元", "#5d6375"));
+        String message = "你有新的支付订单了！共计 " + orderNum + " 笔";
+        if (estimateFee > 0.0D) {
+            message = message + "，预计佣金 " + estimateFee + " 元";
+        }
+        entity.setFirst(new EntityBase(message, "#5d6375"));
         entity.setKeyword1(new EntityBase(String.format("%.2f", eEstimateCosPrice), "#9e0606"));
-        entity.setKeyword2(new EntityBase("一小时内", "#5d6375"));
         entity.setKeyword3(new EntityBase(orderItems(orderList), "#5d6375"));
         return entity;
     }
